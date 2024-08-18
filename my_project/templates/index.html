@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h2>my_view</h2>
+    <!-- перебираем каждый елемент из набора my_data -->
+    {% for my_value in my_data %}
+
+    <!-- берем значение указаной колонки текущей ячейки и выводим -->
+    {{ my_value.column1 }}
+
+    <!-- конец цикла -->
+    {% endfor %}
 </body>
+
 </html>

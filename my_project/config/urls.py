@@ -26,6 +26,8 @@ from my_app.views import my_view
 
 
 urlpatterns = [
+    # path("url-путь/", view-представление, name="название_пути для обращения в index.html"),
+    #
     # путь попадения в панель администратора
     path("admin/", admin.site.urls),
     # путь в попадение в одно представление
