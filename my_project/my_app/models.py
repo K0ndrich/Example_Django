@@ -3,6 +3,7 @@
 
 from django.db import models
 
+
 # создаем свою модель
 class MyModel1(models.Model):
     # создаем колонки для нашей модели
@@ -22,7 +23,12 @@ class MyModel1(models.Model):
 
 
 # Один ко Многим
-my_column3 = models.ForeignKey(MyModel2, on_delete=models.SET_NULL, null=True)
+# null=True разрешает помещать в ячейку значение NULL
+my_column3 = models.ForeignKey(MyModel2, on_delete=models.PROTECT, null=True)
+
+# on_delete=models.SET_NULL -> когда удаляеться ячейка с первой таблици, тогда во второй таблице становить NULL
+# on_delete=models.CASCADE  -> когда удаляеться ячейка с первой таблици, тогда во второй таблице удяються все ячейки связанные с первой
+# on_delete=models.PROTECT  -> нельзя удалить ячейку из первйо таблици, когда есть связаные с ней ячейки во сторой таблице
 
 
 class MyModel2(models.Model):
