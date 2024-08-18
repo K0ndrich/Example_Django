@@ -3,6 +3,9 @@
 
 from django.db import models
 
+class MyModel2(models.Model):
+    my_column1 = models.IntegerField()
+    my_column2 = models.CharField(max_length=255)
 
 # создаем свою модель
 class MyModel1(models.Model):
@@ -15,14 +18,10 @@ class MyModel1(models.Model):
 # 1) Отношение --- Один к Одному ---
 # В первой таблице значение НЕ может повторяться, а во второй тоже НЕ может
 
+
+
 # 2) Отношение --- Один ко Многим ---
 # В первой таблице значение НЕ может повторяться, а во второй Может
-
-# 3) Отношение --- Многие ко Многим ---
-# В первой таблице значение Может повторяться, а во второй тоже Может
-
-
-# Один ко Многим
 # null=True разрешает помещать в ячейку значение NULL
 my_column3 = models.ForeignKey(MyModel2, on_delete=models.PROTECT, null=True)
 
@@ -31,6 +30,8 @@ my_column3 = models.ForeignKey(MyModel2, on_delete=models.PROTECT, null=True)
 # on_delete=models.PROTECT  -> нельзя удалить ячейку из первйо таблици, когда есть связаные с ней ячейки во сторой таблице
 
 
-class MyModel2(models.Model):
-    my_column1 = models.IntegerField()
-    my_column2 = models.CharField(max_length=255)
+# 3) Отношение --- Многие ко Многим ---
+# В первой таблице значение Может повторяться, а во второй тоже Может
+my_column4 = models.ManyToManyField(MyModel2)
+
+
