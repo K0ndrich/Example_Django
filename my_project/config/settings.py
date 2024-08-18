@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# указываем где храниться основной файл с главные(начальными) URL путями для всего проекта
 ROOT_URLCONF = "config.urls"
 
 # TEMPLATES хранит пути местоположения шаблонов, которые будут импользоваться в представлениях views.py
