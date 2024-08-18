@@ -63,10 +63,14 @@ ROOT_URLCONF = "config.urls"
 # TEMPLATES хранит пути местоположения шаблонов, которые будут импользоваться в представлениях views.py
 TEMPLATES = [
     {
+        # # указываем имя для шаблонизатора
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # указываем путь к папке с шаблонами или просто название папки
+        "DIRS": ["templates"],
+        # "APP_DIRS": True  ищет по умолчанию шаблоны в my_project/templates/index.html
         "APP_DIRS": True,
         "OPTIONS": {
+            # контекстные процессоры
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",

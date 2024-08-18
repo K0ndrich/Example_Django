@@ -17,9 +17,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# django
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# my_project
+from my_app.views import my_view
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # путь попадения в панель администратора
+    path("admin/", admin.site.urls),
+    # путь в попадение в одно представление
+    path("my_view/", my_view),
+    # подключаем пути только для одного отдельного приложения my_app
+    path("", include("my_app.urls")),
 ]
