@@ -29,8 +29,8 @@ from my_app.views import my_view
 
 # создание роутера django_rest
 router = SimpleRouter()
-# регистрация ного пути для роутера django_rest
-router.register("api/my_view", OrderView)  # -> 
+# регистрация нового пути для нашего текущего роутера django_rest
+router.register("api/my_view", OrderView)  # ->
 
 
 urlpatterns = [
