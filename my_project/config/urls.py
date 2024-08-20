@@ -25,12 +25,16 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 # my_project
-from my_app.views import my_view
+from my_app.views import my_view, MyAPIView
+
 
 # создание роутера django_rest
 router = SimpleRouter()
+
 # регистрация нового пути для нашего текущего роутера django_rest
-router.register("api/my_view", OrderView)  # ->
+router.register(
+    "api/my_api_view", MyAPIView
+)  # -> http://127.0.0.1:8000/api/my_api_view
 
 
 urlpatterns = [
@@ -45,5 +49,5 @@ urlpatterns = [
 ]
 
 
-# добавление путей роутера django_rest к глобальным url путям
+# добавление всех путей из роутера django_rest к глобальным url путям нашего проекта
 urlpatterns += router.urls

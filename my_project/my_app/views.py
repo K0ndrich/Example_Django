@@ -26,7 +26,7 @@ def my_view2(request):
 
 
 # создание API через наш django_rest
-class OrderView(ModelViewSet):
+class MyAPIView(ModelViewSet):
     # queryset хранит значения елементов которые мы будем выводить в api
     queryset = SalesOrder.objects.all()
     # serializer_class указывает каким сериализатором будем обрабатывать значения и выводить их
