@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # подключаем наше приложение к проекту
+    # my_app подключаем наше приложение к проекту
     "my_app",
+    # rest_framework подключаем django_rest к проекту
+    "rest_framework",
 ]
 
 MIDDLEWARE = [

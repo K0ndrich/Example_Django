@@ -21,8 +21,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# django_rest
+from rest_framework.routers import SimpleRouter
+
 # my_project
 from my_app.views import my_view
+
+# создание роутера django_rest
+router = SimpleRouter()
+# регистрация ного пути для роутера django_rest
+router.register("api/my_view", OrderView)  # -> 
 
 
 urlpatterns = [
@@ -35,3 +43,7 @@ urlpatterns = [
     # подключаем пути только для одного отдельного приложения my_app
     path("", include("my_app.urls")),
 ]
+
+
+# добавление путей роутера django_rest к глобальным url путям
+urlpatterns += router.urls
