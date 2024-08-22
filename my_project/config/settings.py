@@ -18,19 +18,27 @@ from pathlib import Path
 # os подключаем для того чтоб задавать пути для файлов в нашем проекте через os.path.join()
 import os
 
+# для работы с перемеными окружения
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env = environ.Env()
+# прописываем путь до нашого файла .env , который хранит переменные среды
+environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-xlc+!ogwdcp14$#_6c6qf7vjbw@ws*^kcrkme7kroovkkcx$nv"
+# берем значенние переменной среды из .env файла
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True режим дебага включен, нужно выключать при деплое
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
