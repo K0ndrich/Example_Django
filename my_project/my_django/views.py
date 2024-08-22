@@ -3,6 +3,7 @@
 
 # django
 from django.shortcuts import render
+from django.views.generic.list import ListView
 
 from rest_framework.viewsets import ModelViewSet
 
@@ -22,18 +23,12 @@ def my_view(request):
     )
 
 
-# представление основаное на функции
+# представление основаное на функции по-другому
 def my_view2(request):
-    return render(request=request, template_name="index2.html")
+    return render(request, template_name="index2.html")
 
 
-# создание API через наш django_rest
-class MyAPIView(ModelViewSet):
-    # queryset хранит значения елементов которые мы будем выводить в api
-    # queryset = SalesOrder.objects.all()
-    # serializer_class указывает каким сериализатором будем обрабатывать значения и выводить их
-    # serializer_class = OrderSerializer
+# ListView предназначен для вывода списка обьктов модели
+class MyView(ListView):
     pass
-
-
 

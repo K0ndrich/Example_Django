@@ -1,4 +1,4 @@
-# Файл хранит URL пути по которым вызываються представления из views.py
+# Файл хранит URL пути по которым вызываються представления из views.py или подключаються другие пути urls.py
 
 
 """
@@ -25,7 +25,8 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 # my_project
-from my_django.views import my_view, MyAPIView
+from my_django.views import my_view, MyView
+from my_django_rest.views import WomenAPIView
 
 
 # создание роутера django_rest
@@ -42,10 +43,15 @@ urlpatterns = [
     #
     # путь попадения в панель администратора
     path("admin/", admin.site.urls),
-    # путь в попадение в одно представление
-    path("my_view/", my_view),
-    # подключаем пути только для одного отдельного приложения my_app
+    # вызов представлениея основанное на функции
+    path("my_function_view/", my_view),
+    # вызов представлениея основанное на классе
+    path("my_classes_view/", MyView.as_view()),
+    # вызов представления API без роутера
+    path("my_api_view/", WomenAPIView.as_view()),
+    # подключаем файлы с url-путями наших приложений my_django, my_django_rest  к проекту
     path("", include("my_django.urls")),
+    path("", include("my_django_rest.urls")),
 ]
 
 
