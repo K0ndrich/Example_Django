@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
 # my_project
-from my_app.models import MyModel1, MyModel2
+from my_django.models import MyModel1, MyModel2
 
 
 # регистрация нашей модели в админ-панели через функцию
@@ -13,7 +13,7 @@ admin.site.register(MyModel1)
 
 
 # регистрация модели в админ-панели через декоратор
-@admin.register(MyModel1)
+@admin.register(MyModel2)
 class BookAdmin(admin.ModelAdmin):
     pass
 

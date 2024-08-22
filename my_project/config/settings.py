@@ -14,8 +14,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+
 # os подключаем для того чтоб задавать пути для файлов в нашем проекте через os.path.join()
-import os 
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,8 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # my_app подключаем наше приложение к проекту
+    # подключаем наши приложения к проекту
     "my_django",
+    "my_django_rest",
     # rest_framework подключаем django_rest к проекту
     "rest_framework",
 ]
@@ -133,7 +135,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 
 
 # STATIC_URL хранить путь URL по которому в браузере можно будует отобразить наши static(статические) файлы

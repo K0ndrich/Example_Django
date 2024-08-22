@@ -30,7 +30,7 @@ class MyModel1(models.Model):
 
     # 3) Отношение --- Многие ко Многим ---
     # В первой таблице значение Может повторяться, а во второй тоже Может
-    my_column4 = models.ManyToManyField(MyModel2)
+    # my_column4 = models.ManyToManyField(MyModel2)
 
     # будет возвращать не object_1 , а значение нашей указаной колонки текущей ячейки
     def __str__(self):

@@ -7,7 +7,7 @@
 from rest_framework.serializers import ModelSerializer
 
 # my_project
-from orders.models import MyModel1
+from my_django.models import MyModel1
 
 
 class OrderSerializer(ModelSerializer):

@@ -4,8 +4,10 @@
 # django
 from django.shortcuts import render
 
+from rest_framework.viewsets import ModelViewSet
+
 # my_project
-from my_app.models import MyModel1
+from my_django.models import MyModel1
 
 
 # представление основаное на функции
@@ -28,9 +30,10 @@ def my_view2(request):
 # создание API через наш django_rest
 class MyAPIView(ModelViewSet):
     # queryset хранит значения елементов которые мы будем выводить в api
-    queryset = SalesOrder.objects.all()
+    # queryset = SalesOrder.objects.all()
     # serializer_class указывает каким сериализатором будем обрабатывать значения и выводить их
-    serializer_class = OrderSerializer
+    # serializer_class = OrderSerializer
+    pass
 
 
 
