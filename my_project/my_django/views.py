@@ -31,3 +31,6 @@ class MyAPIView(ModelViewSet):
     queryset = SalesOrder.objects.all()
     # serializer_class указывает каким сериализатором будем обрабатывать значения и выводить их
     serializer_class = OrderSerializer
+
+
+

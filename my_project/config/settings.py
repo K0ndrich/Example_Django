@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # my_app подключаем наше приложение к проекту
-    "my_app",
+    "my_django",
     # rest_framework подключаем django_rest к проекту
     "rest_framework",
 ]
