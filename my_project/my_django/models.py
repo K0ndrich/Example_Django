@@ -26,9 +26,9 @@ class MyModel1(models.Model):
     # null=True разрешает помещать в ячейку значение NULL
     my_column4 = models.ForeignKey(MyModel2, on_delete=models.PROTECT, null=True)
 
-    # on_delete=models.SET_NULL -> когда удаляеться ячейка с первой таблици MyModel1, тогда во второй таблице MyModel2 становить NULL
-    # on_delete=models.CASCADE  -> когда удаляеться ячейка с первой таблици MyModel1, тогда во второй таблице MyModel2 удяються все ячейки связанные с первой
-    # on_delete=models.PROTECT  -> нельзя удалить ячейку из первой таблици MyModel1, когда есть связаные с ней ячейки во второй таблице MyModel2
+    # on_delete=models.SET_NULL -> когда удаляеться ячейка с первой текущей таблици MyModel1, тогда во второй таблице MyModel2 становить NULL
+    # on_delete=models.CASCADE  -> когда удаляеться ячейка с первой текущей таблици MyModel1, тогда во второй таблице MyModel2 удяються все ячейки связанные с первой
+    # on_delete=models.PROTECT  -> нельзя удалить ячейку из первой текущей таблици MyModel1, когда есть связаные с ней ячейки во второй таблице MyModel2
     #
     #
     # 3) Отношение --- Многие ко Многим ---
