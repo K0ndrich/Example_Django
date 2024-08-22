@@ -7,5 +7,6 @@ from django.urls import path, include
 from my_django.views import my_view2
 
 urlpatterns = [
-    path("my_view2/", my_view2),
+    # name позволяет обращаться к етому url-адресу в коде 
+    path("my_view2/", my_view2, name="my_view2"),
 ]
