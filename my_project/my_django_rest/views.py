@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 
 # my_project
 from my_django_rest.models import Women
-from my_django_rest.serializers import WomenSerializer
+from my_project.my_django_rest.serializers.main_serializers import WomenSerializer
 
 
 # APIView унаследуемся от базового класса, стоит во главе иерархии
