@@ -11,7 +11,7 @@ class Women(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     # default указывает значение по умолчанию
     is_published = models.BooleanField(default=True)
-    # отношение одик ко многим
+    # отношение многие к одному
     cat = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
 
     def __str__(self):
