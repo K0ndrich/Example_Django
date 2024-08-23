@@ -20,8 +20,15 @@ ADD .env.docker /my_project/.env
 # ENV создает новые переменные оружения внутри .env.docker файла
 ENV APP_NAME = MY_PROJECT
 
+# скачиваем наши зависимости для нашего docker-образа
+RUN pip install -r req.txt
+
+# запуск проекта на веб-сервере
+# CMD gunicorn config.wsgi:application -b 0.0.0.0:8000
+CMD python manage.py runserver
+
 # CMD указывает действия которые будут выполняться при запуске текущего docker-контейнера
-CMD python test.py 
+# CMD python test.py 
 
 
 

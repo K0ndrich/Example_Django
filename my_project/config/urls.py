@@ -25,7 +25,7 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 # my_project
-from my_django.views import my_view, MyView
+from my_django.views import my_view, MyView, my_request_data
 from my_django_rest.views import WomenAPIView
 
 
@@ -49,6 +49,8 @@ urlpatterns = [
     path("my_classes_view/", MyView.as_view()),
     # вызов представления API без роутера
     path("my_api_view/", WomenAPIView.as_view()),
+    # разбираем наш request из чего состоит
+    path("my_request_data/", my_request_data),
     # подключаем файлы с url-путями наших приложений my_django, my_django_rest  к проекту
     path("", include("my_django.urls")),
     path("", include("my_django_rest.urls")),
