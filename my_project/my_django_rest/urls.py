@@ -4,7 +4,7 @@
 from django.urls import path, include
 
 # my_project
-from my_django.views import my_view2
+from my_django.views.main_views import my_view2
 
 urlpatterns = [
     path("my_view2/", my_view2),

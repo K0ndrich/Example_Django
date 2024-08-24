@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     "my_django_rest",
     # rest_framework подключаем django_rest к проекту
     "rest_framework",
+    # дополнительный функционал для нашего django
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

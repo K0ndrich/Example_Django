@@ -25,8 +25,8 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 # my_project
-from my_django.views import my_view, MyView, my_request_data
-from my_django_rest.views import WomenAPIView
+from my_django.views.main_views import my_view, MyView, my_request_data
+from my_django_rest.views.views import WomenAPIView
 
 
 # создание роутера django_rest
