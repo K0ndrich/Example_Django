@@ -49,7 +49,7 @@ class MyModel1(models.Model):
     #
     #
     # 2) Отношение --- Один ко Многим ---
-    # В первой таблице значение НЕ может повторяться, а во второй Может
+    # В первой таблице  значение НЕ может повторяться, а во второй Может
     # null=True разрешает помещать в ячейку значение NULL
     is_published = models.ForeignKey("MyModel2", on_delete=models.PROTECT, null=True)
 
