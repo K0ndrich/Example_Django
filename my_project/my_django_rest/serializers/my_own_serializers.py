@@ -4,8 +4,10 @@
 # django
 
 # django_rest
+import io
 from rest_framework import serializers
 from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 
 # my_project
 
@@ -25,7 +27,7 @@ class WomenSerializer(serializers.Serializer):
     content = serializers.CharField()
 
 
-# функция преобразовывает простую строку в json-строку
+# encode функция преобразовывает простой словарь в json-строку
 def encode():
 
     model = WomenModel(title="Max_Kondrich", content="c-o-n-t-e-n-t")
@@ -33,16 +35,36 @@ def encode():
     # переобразованые простой строки в словарь с данными
     model_sr = WomenSerializer(model)
 
-    print(model_sr.data, type(model_sr.data), sep="\n")
     model_sr.data  # -> {'title': 'Max_Kondrich', 'content': 'c-o-n-t-e-n-t'}
     type(
         model_sr.data
     )  # -> <class 'rest_framework.utils.serializer_helpers.ReturnDict'>
 
-    # преобразовывает сериализованую строку в json-строку
+    # преобразовывает наш словарь в json-строку
     json = JSONRenderer().render(model_sr.data)
-
-    print(json, type(json), sep="\n")
 
     json  # -> b'{"title":"Max_Kondrich","content":"c-o-n-t-e-n-t"}'
     type(json)  # -> <class 'bytes'>
+
+
+# функция преобразовывает json-строку в словарь
+def decode():
+    # содержит json-строку
+    stream = io.BytesIO(b'{"title":"Max_Kondrich","content":"c-o-n-t-e-n-t"}')
+
+    stream  # -> <_io.BytesIO object at 0x000001B4F29D8400>
+    type(stream)  # -><class '_io.BytesIO'>
+
+    data = JSONParser().parse(stream)
+
+    data  # -> {'title': 'Max_Kondrich', 'content': 'c-o-n-t-e-n-t'}
+    type(data)  # -> <class 'dict'>
+
+    # переводим json-строку в словарь
+    serializer = WomenSerializer(data=data)
+
+    # проверка десериализовных данных на верность
+    serializer.is_valid()
+
+    serializer.validated_data  # -> {'title': 'Max_Kondrich', 'content': 'c-o-n-t-e-n-t'}
+    type(serializer.validated_data)  # -> <class 'dict'>
