@@ -43,7 +43,7 @@ class WomenAPIView(APIView):
             raise_exception=True
         )  # -> "title": ["Ето поле обязательное"]
 
-        # 1) ВАРИАНТ С МЕТОДОМ CREATE СЕРИАЛИЗАТОРА
+        # 1) ВАРИАНТ С МЕТОДОМ -CREATE- СЕРИАЛИЗАТОРА
         # добавление текущей новой ячейки в базу данных
         # вызов сериализаторе нашего метода create
         serializer.save()
@@ -65,6 +65,26 @@ class WomenAPIView(APIView):
     def put(self, request, *args, **kwargs):
 
         pk = kwargs.get("pk", None)
+
+        # если нету id-ключа pk возвращаем ошибку
+        if not pk:
+            return Response({"ERROR": "Method PUT not allowed"})
+
+        try:
+
+            # берем запись из базы по id-ключу pk
+            instance = Women.objects.get(pk=pk)
+
+        except:
+
+            return Response({"ERROR": "This PK object is not allowed"})
+
+        # instance указываем какую запись будем менять
+        serializer = WomenSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({"post": serializer.data})
 
 
 # ListAPIView предназначен для вывода списока обьектов через api
