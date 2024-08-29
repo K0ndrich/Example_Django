@@ -32,7 +32,7 @@ class WomenAPIView(APIView):
         # возвращает ответ в типе django_rest
         # return Response({"my_get_request": "Kondrich"})
 
-    # метод обрабатывает post-запросы от пользователя к сайту, добавление ячеек в модель(базу данных)
+    # метод обрабатывает post-запросы от пользователя к сайту, только отправляет данные на сервер (не сохраняет их там)
     def post(self, request):
 
         # розпоковываем json строку полученую из url-адресса в список словарей
@@ -43,21 +43,28 @@ class WomenAPIView(APIView):
             raise_exception=True
         )  # -> "title": ["Ето поле обязательное"]
 
-        post_new = Women.objects.create(
-            # request.data["title"] ето значения которие мы прописываев в url-адресе при post-запросе
-            title=request.data["title"],
-            content=request.data["content"],
-            cat_id=request.data["cat_id"],
-        )
+        # 1) ВАРИАНТ С МЕТОДОМ CREATE СЕРИАЛИЗАТОРА
+        # добавление текущей новой ячейки в базу данных
+        # вызов сериализаторе нашего метода create
+        serializer.save()
 
-        # 1) ВАРИАНТ
+        # 2) ВАРИАНТ БЕЗ МЕТОДА СЕРИАЛИЗАТОРА
+        # post_new = Women.objects.create(
+        #     # request.data["title"] ето значения которие мы прописываев в url-адресе при post-запросе
+        #     title=request.data["title"],
+        #     content=request.data["content"],
+        #     cat_id=request.data["cat_id"],
+        # )
+
         return Response(
-            {"posts": WomenSerializer(post_new).data}
+            {"posts": serializer.data}
         )  # -> {"posts":{"title":"my_name","cat_id":2}}
 
-        # 2) ВАРИАНТ
-        # model_to_dict преобразовывает йчейку из модели и словарь
-        # return Response({"post": model_to_dict(post_new)})  # -> {"post": {"id": 7,"title": "my_name","content": "my_text","is_published": true,"cat": 2}}
+    # перезаписывает запись в базе данных
+    # вызывает метод update из нашего сериализатора
+    def put(self, request, *args, **kwargs):
+
+        pk = kwargs.get("pk", None)
 
 
 # ListAPIView предназначен для вывода списока обьектов через api

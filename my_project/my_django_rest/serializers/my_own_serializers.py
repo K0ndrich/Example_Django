@@ -15,13 +15,18 @@ from rest_framework.parsers import JSONParser
 # просто создает одну строку формата НЕ json
 class WomenModel:
     def __init__(self, title, content):
+
         # создаем локальные атрибуты екзепляра класса, просто наша строка (пока НЕ json)
         self.title = title
         self.content = content
 
 
+# -----   СВОЙ СЕРИАЛИЗАТОР   --------------------------------------------------------------------------------------------------------------------------------------------
+
+
 # текущий класс унаследуеться от базового класса сериализации Serializer
 class WomenSerializer(serializers.Serializer):
+
     title = serializers.CharField(max_length=255)
     content = serializers.CharField()
     # read_only=True поле используеться только для чтения
@@ -29,6 +34,31 @@ class WomenSerializer(serializers.Serializer):
     time_update = serializers.DateTimeField(read_only=True)
     is_published = serializers.BooleanField(default=True)
     cat_id = serializers.IntegerField()
+
+    # добавление новой записи в базу данных (сохраняет их в базе)
+    # validated_data хранит словарь наших данных, которые мы передавали в url-адресс
+    def create(self, validated_data):
+
+        # **validated_data розпаковываем словрь с данными
+        return Women.objects.create(**validated_data)
+
+    # изменение уже существующей записи в базе данных (перезаписывает ее в базе)
+    def update(self, instance, validated_data):
+
+        # берез значение из словаря validated_data по указаному ключю
+        # если значение не находим, тогда возвращаем значение по умолчанию instance.title
+        instance.title = validated_data.get("title", instance.title)
+
+        instance.content = validated_data.get("content", instance.content)
+        instance.time_update = validated_data.get("time_update", instance.time_update)
+        instance.is_published = validated_data.get("time_update", instance.is_published)
+        instance.cat_id = validated_data.get("time_update", instance.cat_id)
+
+        # перезаписывает запись в базе
+        instance.save()
+
+
+# -----   ОТДЕЛЬНЫЕ ФУНКЦИИ   --------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # encode функция преобразовывает простой словарь в json-строку
