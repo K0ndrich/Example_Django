@@ -20,24 +20,44 @@ class WomenAPIView(APIView):
     # метод обрабатыает get-запросы от пользователя к сайту
     def get(self, request):
 
-        my_list = Women.objects.all().values()
+        my_objects = Women.objects.all()
 
-        return Response({"womens": list(my_list)})
+        # 1) ВАРИАНТ
+        # many=True указываем что сериализатору нужно оборабатывать не одну запись, а набор записей
+        return Response(
+            {"posts": WomenSerializer(my_objects, many=True).data}
+        )  # -> {"posts":[{"title":"Women_1","cat_id":1},{"title":"Women_2","cat_id":2},{"title":"Women_3","cat_id":1},{"title":"Women_4","cat_id":1},{"title":"Oleksey","cat_id":2},{"title":"my_name","cat_id":2}]}
+
+        # 2) ВАРИАНТ
         # возвращает ответ в типе django_rest
         # return Response({"my_get_request": "Kondrich"})
 
     # метод обрабатывает post-запросы от пользователя к сайту, добавление ячеек в модель(базу данных)
     def post(self, request):
+
+        # розпоковываем json строку полученую из url-адресса в список словарей
+        serializer = WomenSerializer(data=request.data)
+        # проверка на уровне сериализатора правильно ли указаны все параметры в url-адресе
+        # ловим ошибку, которая вылетит
+        serializer.is_valid(
+            raise_exception=True
+        )  # -> "title": ["Ето поле обязательное"]
+
         post_new = Women.objects.create(
             # request.data["title"] ето значения которие мы прописываев в url-адресе при post-запросе
             title=request.data["title"],
             content=request.data["content"],
             cat_id=request.data["cat_id"],
         )
-        # model_to_dict преобразовывает йчейку из модели и словарь
+
+        # 1) ВАРИАНТ
         return Response(
-            {"post": model_to_dict(post_new)}
-        )  # -> {"post":{"id":5,"title":"Oleksey","content":"My_Content7","is_published":true,"cat":2}}
+            {"posts": WomenSerializer(post_new).data}
+        )  # -> {"posts":{"title":"my_name","cat_id":2}}
+
+        # 2) ВАРИАНТ
+        # model_to_dict преобразовывает йчейку из модели и словарь
+        # return Response({"post": model_to_dict(post_new)})  # -> {"post": {"id": 7,"title": "my_name","content": "my_text","is_published": true,"cat": 2}}
 
 
 # ListAPIView предназначен для вывода списока обьектов через api

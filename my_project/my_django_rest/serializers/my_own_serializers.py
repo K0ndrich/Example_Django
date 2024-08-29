@@ -20,11 +20,15 @@ class WomenModel:
         self.content = content
 
 
-# проводит сериализацию строки, которую создаем в WomenModel
 # текущий класс унаследуеться от базового класса сериализации Serializer
 class WomenSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=255)
     content = serializers.CharField()
+    # read_only=True поле используеться только для чтения
+    time_create = serializers.DateTimeField(read_only=True)
+    time_update = serializers.DateTimeField(read_only=True)
+    is_published = serializers.BooleanField(default=True)
+    cat_id = serializers.IntegerField()
 
 
 # encode функция преобразовывает простой словарь в json-строку
