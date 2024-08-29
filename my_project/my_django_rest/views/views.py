@@ -45,7 +45,7 @@ class WomenAPIView(APIView):
 
         # 1) ВАРИАНТ С МЕТОДОМ -CREATE- СЕРИАЛИЗАТОРА
         # добавление текущей новой ячейки в базу данных
-        # вызов сериализаторе нашего метода create
+        # сохранение ячейки в базе
         serializer.save()
 
         # 2) ВАРИАНТ БЕЗ МЕТОДА СЕРИАЛИЗАТОРА
@@ -79,12 +79,28 @@ class WomenAPIView(APIView):
 
             return Response({"ERROR": "This PK object is not allowed"})
 
-        # instance указываем какую запись будем менять
-        serializer = WomenSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        instance.delete()
 
         return Response({"post": serializer.data})
+
+    # удаление существующей ячейки в базе данных (удаляет ее из базы)
+    def delete(self, request, *args, **kwargs):
+
+        pk = kwargs.get("pk", None)
+
+        if not pk:
+            return Response({"ERROR": "Method DELETE not allowed"})
+
+        try:
+            instance = Women.objects.get(pk=pk)
+
+        except:
+            return Response({"ERROR": "This PK object is not allowed"})
+
+        # само удаление ячейки из базы
+        instance.delete()
+
+        return Response({"post": "Delete post -> " + str(pk)})
 
 
 # ListAPIView предназначен для вывода списока обьектов через api

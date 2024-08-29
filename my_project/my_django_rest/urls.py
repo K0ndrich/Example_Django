@@ -4,8 +4,16 @@
 from django.urls import path, include
 
 # my_project
-from my_django.views.main_views import my_view2
+from my_django_rest.views.views import WomenAPIView
 
 urlpatterns = [
-    path("my_view2/", my_view2),
+    #
+    # вызов представления API без роутера
+    path("my_api_view/", WomenAPIView.as_view()),
+    #
+    # внутрь url-адреса передаем переменную pk с типом данных int
+    # изменяет уже существующие ячейки в базе или удаляем ети ячейки по id-ключу
+    path(
+        "my_api_view/<int:pk>/", WomenAPIView.as_view()
+    ),  # -> 127.0.0.1:8000/my_api_view/1/
 ]
