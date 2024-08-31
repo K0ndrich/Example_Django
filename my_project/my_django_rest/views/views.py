@@ -82,7 +82,7 @@ class WomenAPIView(APIView):
         instance.delete()
 
         return Response({"post": serializer.data})
-
+    
     # удаление существующей ячейки в базе данных (удаляет ее из базы)
     def delete(self, request, *args, **kwargs):
 
