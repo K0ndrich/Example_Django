@@ -4,12 +4,11 @@
 from rest_framework import serializers
 
 
-
 # my_project
 from my_django_rest.models import Women
 
 
-# сериализатор для взаемодейтсвия с моделью django
+# ModelSerializer сериализатор для взаемодейтсвия с модельями django
 class WomenSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -17,5 +16,4 @@ class WomenSerializer(serializers.ModelSerializer):
         model = Women
         # fields указывает поля модели, которые будут отправляться пользователю назад
         # fields = "__all__"  указываем все поля
-        # cat_id колонка cat из первой таблици, а id ето колонка из второй таблици
-        fields = ("title", "cat_id")
+        fields = ("title", "content", "cat")

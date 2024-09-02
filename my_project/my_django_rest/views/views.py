@@ -6,12 +6,24 @@ from django.shortcuts import render
 from rest_framework.response import Response
 
 # django_rest
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework.views import APIView
+
 
 # my_project
 from my_django_rest.models import Women
 from my_django_rest.serializers.main_serializers import WomenSerializer
+
+
+# ListCreateAPIView предназначен для вывода набора записей базы данных по get-запросу и добавление новый записей по post-запросу
+class WomenAPIList(ListCreateAPIView):
+    # queryset указывает какие записи из базы будем выводить
+    queryset = Women.objects.all()
+    # serializer_class указывает каким сериализатором будем пользоваться
+    serializer_class = WomenSerializer
+
+
+# -----   СОЗДАЛИ СВОЕ ПОЛЬЗОВАТЕЛСЬКОЕ API-ПРЕДСТАВЛЕНИЕ   --------------------------------------------------------------------------------------------------------------------------------------
 
 
 # APIView унаследуемся от базового класса, стоит во главе иерархии
@@ -79,10 +91,11 @@ class WomenAPIView(APIView):
 
             return Response({"ERROR": "This PK object is not allowed"})
 
-        instance.delete()
-
+        serializer = WomenSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response({"post": serializer.data})
-    
+
     # удаление существующей ячейки в базе данных (удаляет ее из базы)
     def delete(self, request, *args, **kwargs):
 
@@ -101,11 +114,3 @@ class WomenAPIView(APIView):
         instance.delete()
 
         return Response({"post": "Delete post -> " + str(pk)})
-
-
-# ListAPIView предназначен для вывода списока обьектов через api
-# class WomenAPIView(ListAPIView):
-#     # queryset указывает какие обьекты будем выводить
-#     queryset = Women.objects.all()
-#     # serializer_class указывает каким сериализатором будем пользоваться
-#     serializer_class = WomenSerializer
