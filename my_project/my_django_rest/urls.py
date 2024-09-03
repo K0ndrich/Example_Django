@@ -7,6 +7,7 @@ from django.urls import path, include
 from my_django_rest.views.my_own_api_view import WomenAPIView
 from my_django_rest.views.views import WomenAPIList, WomenAPIUpdate, WomenAPIDetailView
 
+
 urlpatterns = [
     #
     # вызов представления API без роутера
