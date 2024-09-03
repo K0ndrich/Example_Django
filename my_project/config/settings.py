@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     # rest_framework подключаем django_rest к проекту
     "rest_framework",
     # дополнительный функционал для нашего django
-    'django_extensions'
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -161,3 +161,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# удаляет возможность пользователям искать информацию django rest вводя команды в url-адрессе сайта
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+        # "rest_framework.renderers.BrowsableAPIRenderer", ->  если строка закоментирована, тогда вписывать в url-адресс ничего нельзя
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ]
+}

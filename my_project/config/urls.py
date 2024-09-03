@@ -17,26 +17,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 # django
 from django.contrib import admin
 from django.urls import path, include
-
-# django_rest
-from rest_framework.routers import SimpleRouter
 
 # my_project
 from my_django.views.main_views import my_view, MyView
 from my_django.views.request_views import my_request_data
 from my_django_rest.views.my_own_api_view import WomenAPIView
-
-
-# создание роутера django_rest
-# router = SimpleRouter()
-
-# регистрация нового пути для нашего текущего роутера django_rest
-# router.register(
-#     "api/my_api_view", MyAPIView
-# )  # -> http://127.0.0.1:8000/api/my_api_view
 
 
 urlpatterns = [

@@ -1,4 +1,6 @@
-# Файл содежит только API-VIEWS для django_rest
+# Файл содежит только API-Предствления для django_rest
+# API-Представление хранят в себе возможность пользователя взаемодействовать с всеми типами запросов (get- , post-, put-, patch-, delete-)
+
 
 # django
 from django.forms import model_to_dict
