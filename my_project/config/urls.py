@@ -27,7 +27,7 @@ from rest_framework.routers import SimpleRouter
 # my_project
 from my_django.views.main_views import my_view, MyView
 from my_django.views.request_views import my_request_data
-from my_django_rest.views.views import WomenAPIView
+from my_django_rest.views.my_own_api_view import WomenAPIView
 
 
 # создание роутера django_rest
@@ -41,11 +41,10 @@ from my_django_rest.views.views import WomenAPIView
 
 urlpatterns = [
     # path("url-путь/", view-представление, name="название_пути для обращения в index.html"),
-    # 
+    #
     # путь попадения в панель администратора
     path("admin/", admin.site.urls),
-    
-    
+    #
     # подключаем файлы с url-путями наших приложений my_django, my_django_rest  к проекту
     path("", include("my_django.urls")),
     path("", include("my_django_rest.urls")),
