@@ -1,4 +1,7 @@
-# Файл хранит настройки чтоб веб-сервер смог запустить наше django проект
+# Файл хранит настройки чтоб веб-сервер смог запустить наш django-проект
+# WSGI - ето название нашего веб сервера на котором будет работать наш django-проект
+# WSGI ето Apache, Nginx , Gunicorn
+
 
 """
 WSGI config for config project.
@@ -13,6 +16,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 application = get_wsgi_application()
