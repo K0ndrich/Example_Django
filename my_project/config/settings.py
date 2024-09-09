@@ -41,7 +41,8 @@ SECRET_KEY = env("SECRET_KEY")
 # DEBUG = True режим дебага включен, нужно выключать при деплое
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+# '*' означает запуск на любих ip-адресах
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -106,11 +107,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # DATABASES подключение баз данных к нашему проекту
 DATABASES = {
+    #
+    #
+    # Покдлючение к базе PostgreSQL, которая лежит внутри контейнера (docker-compose.yml)
+    # "default": {
+    #     "ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": os.environ.get("DB_NAME"),
+    #     "USER": os.environ.get("DB_USER"),
+    #     "PASSWORD": os.environ.get("DB_PASSWORD"),
+    #     "HOST": os.environ.get("DB_HOST"),
+    #     "PORT": os.environ.get("DB_PORT"),
+    # }
+    #
+    # Подключение к базе SQLite
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+    
+    
 }
+
+
 
 
 # Password validation

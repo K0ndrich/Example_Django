@@ -17,9 +17,8 @@ from my_django_rest.views.viewsets import WomenViewSet
 my_router = SimpleRouter()
 
 # регистрация нового пути внутрь нашего роутера my_router
-# r " " регулярное выражение, префикс для набора маршрутов
+# r " " регулярное выражение, префикс для набора маршрутов , будет вставляться в конце каждого маршрута, где будем использовта
 my_router.register(r"women", WomenViewSet)
-
 
 urlpatterns = [
     #
@@ -44,7 +43,7 @@ urlpatterns = [
     path(
         "my_router/", include(my_router.urls)
     ),  # -> http://127.0.0.1:8000/my_router/women/
-    #
+    # -> http://127.0.0.1:8000/my_router/women/<int:pk>/
     #
     # ВНУТРИ РОУТЕРА НАХОДИТЬСЯ ВСЕ ЧТО НИЖЕ
     # вызываеться не одно api-представление, а набор api-представлений
