@@ -4,7 +4,7 @@
 from django.urls import path, include
 
 # django_rest
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
 # my_project
 from my_django_rest.views.my_own_api_view import WomenAPIView
@@ -14,11 +14,20 @@ from my_django_rest.views.viewsets import WomenViewSet
 
 # роутеры упрощают маршрутизацию(прописание url-адрессов) для django rest
 # создание простого роутера
-my_router = SimpleRouter()
+# my_router = SimpleRouter()
+
+# DefaultRouter хранит внутри себя больше url-адрессов чем SimpleRouter
+# также при написании основного url-адресса без продолжения, который указан в роутере не выдает ошибку, а возвращает сам url-адресс но с продолжением
+# основной url-адресс без продолжения http://127.0.0.1:8000/my_router/
+my_router = DefaultRouter()
 
 # регистрация нового пути внутрь нашего роутера my_router
 # r " " регулярное выражение, префикс для набора маршрутов , будет вставляться в конце каждого маршрута, где будем использовта
-my_router.register(r"women", WomenViewSet)
+# basename указывает name для url-путей текущего роутера, также basename нужно указывать если не определен стандартный queryset
+my_router.register(r"women", WomenViewSet, basename="women")
+
+# возвращает все маршруты, которые храняться в указаном роутере my_router
+my_router.urls
 
 urlpatterns = [
     #
