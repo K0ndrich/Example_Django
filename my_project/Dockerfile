@@ -2,7 +2,7 @@
 # Файл хранит настройки для одного текущего docker-контейнера
 
 # FROM берем образ на котором будет работать текущий один docker-контейнер
-FROM python:3.11-slim
+FROM python:3.9-slim
 
 # создаем папку и указываем что ето рабочая директория
 WORKDIR /app
@@ -12,8 +12,14 @@ WORKDIR /app
 COPY . /app/
 
 # RUN выполняет команды во время создания docker-образа из которого будет запущен наш контейнер
+# обновление пакетов debian 
+RUN apt-get update && apt-get install -y curl && apt-get clean
+
+# обновление для python пакетого менеджера pip
+RUN pip install --upgrade pip
+
 # RUN pip install -r req.txt  (НЕ РАБОТАЕТ)
-RUN /bin/sh -c pip install -r req.txt
+RUN pip install -r req.txt
 
 # CMD выполняет команды уже внутри запущеного текущего docker-контейнера
 # && python manage.py shell -c создание суперпользователя, если его нету login->root   password->1234
