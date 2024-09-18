@@ -2,7 +2,7 @@
 # Файл хранит настройки для одного текущего docker-контейнера
 
 # FROM берем образ на котором будет работать текущий один docker-контейнер
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # создаем папку и указываем что ето рабочая директория
 WORKDIR /app
@@ -13,7 +13,7 @@ COPY . /app/
 
 # RUN выполняет команды во время создания docker-образа из которого будет запущен наш контейнер
 # обновление пакетов debian 
-RUN apt-get update && apt-get install -y curl && apt-get clean
+# RUN apt-get update && apt-get install -y curl && apt-get clean
 
 # обновление для python пакетого менеджера pip
 RUN pip install --upgrade pip
@@ -26,8 +26,8 @@ RUN pip install -r req.txt
 # && python manage.py initialize_db создание базы данных для проекта внутри контейнера
 CMD python manage.py migrate \
     && python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='kondrich').exists() or User.objects.create_superuser('kondrich', '123kondrich@gmail.com', '1234')" \
-    && python manage.py initialize_db \
     && python manage.py runserver 0.0.0.0:8000
+    # && python manage.py initialize_db \  (НЕ РАБОТАТЕ - ВЫДАЕТ ОШИБКУ)
     # && python manage.py collectstatic --no-input \
     # && gunicorn prediction.wsgi:application --bind 0.0.0.0:8000 --log-level info
 

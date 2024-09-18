@@ -35,14 +35,14 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # берем значенние переменной среды из .env файла
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True режим дебага включен, нужно выключать при деплое
-DEBUG = env("DEBUG")
+DEBUG = os.environ.get("DEBUG") == "True"
 
 # '*' означает запуск на любих ip-адресах
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
