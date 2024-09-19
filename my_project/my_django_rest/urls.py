@@ -9,7 +9,12 @@ from rest_framework.routers import SimpleRouter, DefaultRouter
 # my_project
 from my_django_rest.views.my_own_api_view import WomenAPIView
 from my_django_rest.views.views import WomenAPIList, WomenAPIUpdate, WomenAPIDetailView
-from my_django_rest.views.viewsets import WomenAPIList, WomenAPIUpdate, WomenAPIDestroy
+from my_django_rest.views.viewsets import WomenViewSet
+from my_django_rest.views.permissions_views import (
+    WomenAPIList,
+    WomenAPIUpdate,
+    WomenAPIDestroy,
+)
 
 
 # роутеры упрощают маршрутизацию(прописание url-адрессов) для django rest
@@ -63,6 +68,7 @@ urlpatterns = [
     # вызывает другой метод (действие) в viewset
     # path("my_api_viewset/<int:pk>/", WomenViewSet.as_view({"put": "update"})),
     #
+    # работаем с правами доступа пользователей (permissions)
     path("women/", WomenAPIList.as_view()),
     path("women/<int:pk>/", WomenAPIUpdate.as_view()),
     path("womendelete/<int:pk>/", WomenAPIDestroy.as_view()),

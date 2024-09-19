@@ -124,11 +124,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-    
-    
 }
-
-
 
 
 # Password validation
@@ -187,5 +183,11 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
         # "rest_framework.renderers.BrowsableAPIRenderer", ->  если строка закоментирована, тогда вписывать в url-адресс ничего нельзя
         "rest_framework.renderers.BrowsableAPIRenderer",
-    ]
+    ],
+    # (ПОКА НЕ ИСПОЛЬЗУЕМ)
+    # указываем права доступа только для всех авторизованых пользователей по умолчанию
+    # все всех api-представлений, где не указан permission_classes будет стоять указаное значение IsAuthenticated
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework.permissions.IsAuthenticated",
+    # ],
 }

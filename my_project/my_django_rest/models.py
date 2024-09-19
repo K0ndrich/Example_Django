@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Women(models.Model):
+
     title = models.CharField(max_length=255)
     # blank указывает можно ли заполнять пустым значением
     content = models.TextField(blank=True)
