@@ -1,4 +1,6 @@
+# django
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Women(models.Model):
@@ -13,6 +15,13 @@ class Women(models.Model):
     is_published = models.BooleanField(default=True)
     # отношение многие к одному
     cat = models.ForeignKey("Category", on_delete=models.PROTECT, null=True)
+
+    # хранит значения наший пользователей, ссылаеться на основную модель с пользователями User
+    # отношение многие к одному
+    # User название заводской таблице без скобочек
+    user = models.ForeignKey(
+        User, verbose_name="Пользователь", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.title
