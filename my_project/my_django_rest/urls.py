@@ -62,14 +62,23 @@ urlpatterns = [
     # ВНУТРИ РОУТЕРА НАХОДИТЬСЯ ВСЕ ЧТО НИЖЕ
     # вызываеться не одно api-представление, а набор api-представлений
     # нужно указывать методы для каждого типа запросов, обрабатывает только указаный метод запроса
+    #
     # { "тип_запроса" : "мой_метод_из_viewset" }
     # path("my_api_viewset/", WomenViewSet.as_view({"get": "list"})),
     #
     # вызывает другой метод (действие) в viewset
     # path("my_api_viewset/<int:pk>/", WomenViewSet.as_view({"put": "update"})),
     #
-    # работаем с правами доступа пользователей (permissions)
+    #
+    # ПРАВА ДОСТУПА ПОЛЬЗОВАТЕЛЕЙ (PERMISSIONS)
     path("women/", WomenAPIList.as_view()),
     path("women/<int:pk>/", WomenAPIUpdate.as_view()),
     path("womendelete/<int:pk>/", WomenAPIDestroy.as_view()),
+    #
+    #
+    # АУТЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЕЙ (Session-Based Authentificatiion) встроеная в django
+    path(
+        "auth/", include("rest_framework.urls")
+    ),  # -> http://127.0.0.1:8000/auth/login/
+    # http://127.0.0.1:8000/auth/logout/
 ]
