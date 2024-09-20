@@ -76,7 +76,7 @@ urlpatterns = [
     path("womendelete/<int:pk>/", WomenAPIDestroy.as_view()),
     #
     #
-    # АУТЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЕЙ (Session-Based Authentificatiion) встроеная в django
+    # АУТЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЕЙ (Session-Based Authentification) встроеная в django_rest
     path(
         "auth/", include("rest_framework.urls")
     ),  # -> http://127.0.0.1:8000/auth/login/
