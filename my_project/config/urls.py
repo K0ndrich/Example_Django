@@ -36,7 +36,8 @@ urlpatterns = [
     #
     # подключаем файлы с url-путями наших приложений my_django, my_django_rest  к проекту
     # namespace указывает пространство имен для одного приложени
-    path("", include("my_django.urls"), namespace="my_django"),
+    # namespace нужен во избежание путаници с одиниковыми name разных приложений
+    path("", include("my_django.urls", namespace="my_django")),
     path("", include("my_django_rest.urls")),
 ]
 
