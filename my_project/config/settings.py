@@ -50,27 +50,37 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
+# в установаленых приложениях сначала нужно прописать встроенные django приложения, потом мои созданные приложения, а только потом сторонные приложения
+# clear_django -> my_django -> django_rest -> djoser
 INSTALLED_APPS = [
     # django.contrib.admin нужен для управления админ-панелью
     "django.contrib.admin",
-    # django.contrib.auth нужен для управления таблици, которая хранит пользователей
+    # django.contrib.auth нужен для управления таблици, которая хранит данные о пользователях
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # подключаем наши приложения к проекту
+    #
+    # подключаем наши новосозданыне пользовательские приложения к проекту
     "my_django",
     "my_django_rest",
+    #
     # rest_framework подключаем django_rest к проекту
+    # https://www.django-rest-framework.org/
     "rest_framework",
+    #
     # указываем чтоб rest_framework использовал свою станданртную таблицу для хранения значений токенов пользователй
     "rest_framework.authtoken",
+    #
     # дополнительный функционал для нашего django
+    # https://django-extensions.readthedocs.io/en/latest/
     "django_extensions",
+    #
     # подключение djoser для аутентификации пользователя по токенам
     # https://djoser.readthedocs.io/en/latest/introduction.html
     "djoser",
+    #
     # подключение simple jwt для аутентификации пользователя по jwt-токенам
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
     # можно декодировать jwt-токен на сайте https://jwt.io/

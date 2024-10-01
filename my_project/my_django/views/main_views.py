@@ -23,14 +23,11 @@ def my_view(request):
     )
 
 
-# представление основаное на функции по-другому
-def my_view2(request):
-    return render(request, template_name="index2.html")
+def my_expression(request):
+    return render(request, template_name="my_django/my_expression.html")
 
 
 # представление основаное на классе
 # ListView предназначен для вывода списка обьктов модели
 class MyView(ListView):
     pass
-
-

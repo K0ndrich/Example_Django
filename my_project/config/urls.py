@@ -28,6 +28,7 @@ from my_django.views.request_views import my_request_data
 from my_django_rest.views.my_own_api_view import WomenAPIView
 
 
+# поиск нужного url-пути происходит сверху-вниз ↓
 urlpatterns = [
     # path("url-путь/", view-представление, name="название_пути для обращения в index.html"),
     #
@@ -35,9 +36,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #
     # подключаем файлы с url-путями наших приложений my_django, my_django_rest  к проекту
-    # namespace указывает пространство имен для одного приложени
+    # namespace указывает пространство имен для одного приложени, внутри приложения нужно указывать app_name = "my_selected_name_"
     # namespace нужен во избежание путаници с одиниковыми name разных приложений
-    path("", include("my_django.urls", namespace="my_django")),
+    path("", include("my_django.urls.main_urls", namespace="my_django")),
     # подключение основных путей django_rest
     path("", include("my_django_rest.urls.main_urls")),
     # подключение путей для аутентификации пользователей различными спобами (сесии, токены, jwt-токены)
