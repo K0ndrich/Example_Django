@@ -7,12 +7,20 @@ from rest_framework.generics import (
     RetrieveUpdateAPIView,
     RetrieveDestroyAPIView,
 )
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import (
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated,
+    IsAdminUser,
+)
+from rest_framework.authentication import TokenAuthentication
 
 # my_project
 from my_django_rest.models import Women, Category
 from my_django_rest.serializers.main_serializers import WomenSerializer
-from my_django_rest.custom_permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from my_django_rest.permissions.custom_permissions import (
+    IsAdminOrReadOnly,
+    IsOwnerOrReadOnly,
+)
 
 
 # AllowAny - полный доступ
@@ -33,7 +41,11 @@ class WomenAPIList(ListCreateAPIView):
 class WomenAPIUpdate(RetrieveUpdateAPIView):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    # доступ к текущему api-представлению имеют только аутентифицырование пользователи
+    permission_classes = (IsAuthenticated,)
+    # пользователи получают доступ к текущему api-представлению только те кто аутентифицировался по токенам
+    # по session_id аутентификации пользователь получить доступ к api-представлению не может
+    authentication_classes = (TokenAuthentication,)
 
 
 # удаляет одну ячейку

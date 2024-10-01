@@ -1,7 +1,7 @@
 # Авторизация и Аунтентификация
 
 # Session-Based authentificatiion - аутентификация на основе сессий и cookies (встроенный в django_rest)
-# Token-Base authentificatiion - аутентификация на основе токенов
+# Token-Base authentificatiion - аутентификация на основе токенов (установка Djoiser)
 # Json Web Token (JWT) authentification - аутентификация на основе JWT-токенов
 # Django Rest Framework OAuth - авторизация через социальные сети (нужно скачивать отдельно)
 

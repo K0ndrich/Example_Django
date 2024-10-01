@@ -62,8 +62,12 @@ INSTALLED_APPS = [
     "my_django_rest",
     # rest_framework подключаем django_rest к проекту
     "rest_framework",
+    # указываем чтоб rest_framework использовал свою станданртную таблицу для хранения значений токенов пользователй
+    "rest_framework.authtoken",
     # дополнительный функционал для нашего django
     "django_extensions",
+    # подключение djoser для аутентификации пользователя по токенам
+    "djoser",
 ]
 
 MIDDLEWARE = [
@@ -185,6 +189,14 @@ REST_FRAMEWORK = {
         # "rest_framework.renderers.BrowsableAPIRenderer", ->  если строка закоментирована, тогда вписывать в url-адресс ничего нельзя
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
+    # подключаем разных типов аутентификации пользователей на сайте 
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        # покдлючение аутентификации по токенам
+        "rest_framework.authentication.TokenAuthentication",
+        # подключение по сесиям session_id , они же значение cookies (две следующих строчки)
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
     # (ПОКА НЕ ИСПОЛЬЗУЕМ)
     # указываем права доступа только для всех авторизованых пользователей по умолчанию
     # все всех api-представлений, где не указан permission_classes будет стоять указаное значение IsAuthenticated
