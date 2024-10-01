@@ -1,1 +1,1 @@
-# Запросы ORM (Object Relation Maping) в базу данных
+# Запросы ORM (Object Relation Maping - Объектно Реляционное Отображение) в базу данных с помощью комманд python
