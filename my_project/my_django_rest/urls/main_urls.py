@@ -74,18 +74,4 @@ urlpatterns = [
     path("women/", WomenAPIList.as_view()),
     path("women/<int:pk>/", WomenAPIUpdate.as_view()),
     path("womendelete/<int:pk>/", WomenAPIDestroy.as_view()),
-    #
-    #
-    # АУТЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЕЙ (Session-Based Authentification) встроеная в django_rest
-    path(
-        "auth/", include("rest_framework.urls")
-    ),  # -> http://127.0.0.1:8000/auth/login/
-    # http://127.0.0.1:8000/auth/logout/
-    #
-    #
-    # АУТЕНТИФИКАЦИЯ ПОЛЬЗОВАТЕЛЕЙ ПО ТОКЕНАМ DJOISER (Token-Based Authentificatiion)
-    # пути для djoiser смотрим в https://djoser.readthedocs.io/en/latest/base_endpoints.html
-    path("auth/", include("djoser.urls")),  # -> http://127.0.0.1:8000/auth/users/
-    re_path(r"^auth/", include("djoser.urls.authtoken")),
-    # http://127.0.0.1:8000/auth/token/login/   создание токена аутентификации для пользователя
 ]
