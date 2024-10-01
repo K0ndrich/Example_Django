@@ -21,6 +21,8 @@ from pathlib import Path
 # для работы с перемеными окружения
 import environ
 
+# нуже для настройки SIMPLE_JWT = {}
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,7 +69,12 @@ INSTALLED_APPS = [
     # дополнительный функционал для нашего django
     "django_extensions",
     # подключение djoser для аутентификации пользователя по токенам
+    # https://djoser.readthedocs.io/en/latest/introduction.html
     "djoser",
+    # подключение simple jwt для аутентификации пользователя по jwt-токенам
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+    # можно декодировать jwt-токен на сайте https://jwt.io/
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -189,10 +196,15 @@ REST_FRAMEWORK = {
         # "rest_framework.renderers.BrowsableAPIRenderer", ->  если строка закоментирована, тогда вписывать в url-адресс ничего нельзя
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
-    # подключаем разных типов аутентификации пользователей на сайте 
+    # подключаем разных типов аутентификации пользователей на сайте
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # покдлючение аутентификации по токенам
-        "rest_framework.authentication.TokenAuthentication",
+        #
+        # подключение аутентификации по токенам
+        # "rest_framework.authentication.TokenAuthentication",
+        #
+        # подключение аутентификации по JWT-токенам
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        #
         # подключение по сесиям session_id , они же значение cookies (две следующих строчки)
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
@@ -203,4 +215,48 @@ REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": [
     #     "rest_framework.permissions.IsAuthenticated",
     # ],
+}
+
+# настройки для библиотеки аутентификации пользователей JWT-токенам SIMPLE JWT
+SIMPLE_JWT = {
+    # указывает время жизни access_token
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    # указывает время жизни refresh_token
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "UPDATE_LAST_LOGIN": False,
+    # указывает алгорит шифрования для создания jwt-токенов для пользователей
+    "ALGORITHM": "HS256",
+    # указывает секретный ключ проекта для формирования signature проекта
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": "",
+    "AUDIENCE": None,
+    "ISSUER": None,
+    "JSON_ENCODER": None,
+    "JWK_URL": None,
+    "LEEWAY": 0,
+    # указывает заголовок для header
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    # указывает само значение header для создания начала jwt-токена
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # указывает что id пользователя внутри payload -
+    "USER_ID_FIELD": "id",
+    # будеи опередялться ключем user_id
+    "USER_ID_CLAIM": "user_id",
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "TOKEN_TYPE_CLAIM": "token_type",
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    "JTI_CLAIM": "jti",
+    # настройка slidin-токенов (ЕЩЕ НЕ УЧИЛ)
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }

@@ -43,9 +43,10 @@ class WomenAPIUpdate(RetrieveUpdateAPIView):
     serializer_class = WomenSerializer
     # доступ к текущему api-представлению имеют только аутентифицырование пользователи
     permission_classes = (IsAuthenticated,)
+    # ПОДКЛЮЧЕНИЕ DJOISER TOKEN
     # пользователи получают доступ к текущему api-представлению только те кто аутентифицировался по токенам
     # по session_id аутентификации пользователь получить доступ к api-представлению не может
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
 
 
 # удаляет одну ячейку
