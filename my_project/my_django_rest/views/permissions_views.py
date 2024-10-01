@@ -12,6 +12,7 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser,
 )
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.authentication import TokenAuthentication
 
 # my_project
@@ -29,12 +30,25 @@ from my_django_rest.permissions.custom_permissions import (
 # IsAuthenticatedOrReadOnly - только для авторизованым или всем, но только для чтения
 
 
+# ПОЛЬЗОВАТЕЛЬСИЙ КЛАСС ПАГИНАЦИИ между страницами ячеек django_rest
+class WomenAPIListPagination(PageNumberPagination):
+    # хранит количество записей на странице по-умолчанию
+    page_size = 3
+    # page_size ето название дополнительного параметра в get-запросе для изменения значения page_size
+    # -> http://127.0.0.1:8000/my_api_list/?limit=10&offset=4&page_size=7
+    page_size_query_param = "page_size"
+    # хранит максимальное значение page_size (page_size_query_param), которое может ввести пользователь в get-запросе к сайту
+    max_page_size = 20
+
+
 # возвращает список ячеек
 class WomenAPIList(ListCreateAPIView):
     queryset = Women.objects.all()
     serializer_class = WomenSerializer
     # permission_classes хранит внутри себя указаные типы ограничения доступа для текущего api-представления
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    # указываем класс пагинации для страниц с ячейками django_rest, работает только для одного текущего api-представления
+    pagination_class = WomenAPIListPagination
 
 
 # изменяет одну ячейку
