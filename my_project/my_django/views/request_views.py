@@ -9,13 +9,13 @@ def my_request_data(request):
 
     # содержит путь к нашему представлению
     path = request.path  # -> /my_request_data/
-    # содержит мето обращения к серверу
+    # содержит метод обращения к серверу
     method = request.method  # -> GET / POST
     # хранит словарь, который содержит все парамаетры нашего get-запрсоа
     get = request.GET
     # хранит словарь, который содержит все парамаетры нашего post-запрсоа
     post = request.POST
-    # хранит значение пользоваетльского агента
+    # хранит значение пользовательского агента
     user_agent = request.META[
         "HTTP_USER_AGENT"
     ]  # -> Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36
