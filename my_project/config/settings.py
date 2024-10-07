@@ -132,6 +132,7 @@ DATABASES = {
     #
     #
     # Покдлючение к базе PostgreSQL, которая лежит внутри контейнера (docker-compose.yml)
+    # нужно установить pip install psycopg2 (если linux -> pip install psycopg2-binary)
     # "default": {
     #     "ENGINE": "django.db.backends.postgresql_psycopg2",
     #     "NAME": os.environ.get("DB_NAME"),
