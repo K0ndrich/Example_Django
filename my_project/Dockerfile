@@ -18,14 +18,16 @@ COPY . /app/
 # обновление для python пакетого менеджера pip
 RUN pip install --upgrade pip
 
-# RUN pip install -r req.txt  (НЕ РАБОТАЕТ)
+# установка зависимостей к проекту
 RUN pip install -r req.txt
 
 # CMD выполняет команды уже внутри запущеного текущего docker-контейнера
 # && python manage.py shell -c создание суперпользователя, если его нету login->root   password->1234
 # && python manage.py initialize_db создание базы данных для проекта внутри контейнера
+# && python manage.py collectstatic берет все сатические файлы и переносит внутрь STATIC_ROOT , чтоб NGINX мог с ними работать и отдавть клиенту на сайт
 CMD python manage.py migrate \
     && python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='kondrich').exists() or User.objects.create_superuser('kondrich', '123kondrich@gmail.com', '1234')" \
+    && python manage.py collectstatic
     && python manage.py runserver 0.0.0.0:8000
     # && python manage.py initialize_db \  (НЕ РАБОТАТЕ - ВЫДАЕТ ОШИБКУ)
     # && python manage.py collectstatic --no-input \

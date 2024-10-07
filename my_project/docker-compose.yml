@@ -60,3 +60,16 @@ services:
       # для DB_HOST берем значение из container_name сервиса postgres_db
       DB_HOST: "postgres"
       DB_PORT: "5432" 
+    volumes:
+      # ./app/static указывает папку внутри проекта, куда будут собираться наши статические файлы после python manage.py collectstatic
+      - static_volume: ./app/static 
+  
+  # cоздание сервиса для веб-сервера NGINX
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    # volumes позволяет нескольким контейнерам использовать указанные файлы
+    volumes:
+      # откуда берем файлы : и куда переносим
+      # перелаживам нашу настройку nignx внутрь скачаного образа nginx:latest
+      - ./nginx.conf : etc/nginx/nginx.conf

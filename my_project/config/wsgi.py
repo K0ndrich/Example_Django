@@ -2,12 +2,10 @@
 #
 # WSGI - ето интерфес взаемодействия нашего django-проекта и веб-сервера(Nginx) на котором он будет работать
 # Пример WSGI ето gunicorn
-# 
+#
 # NGINX - ето сам веб-сервер на котором будет работать наш django-проект
 #
 # WSGI взаемодействует с Apache, Nginx , Gunicorn
-
-
 """
 WSGI config for config project.
 
