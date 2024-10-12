@@ -25,10 +25,14 @@ jobs:
     # steps указывает действия которые будут выполняться внутри вирутальной машини
     steps:
     # name указзываем название нашего step, наше имя Print Hello Message
-      - name: Print Hello Message
+      - name: Print Hello Message 1
         # run укзываем команды, которые будут выполняться в step, а именно внутри вирртульной машини ubuntu
-        run: echo "Print Hello Message"
+        run: echo "Print Hello Message1 "
     
 
   my_name_task2:
     runs_on: ubunut-latest
+
+    steps:
+     - name: Print Hello Message 2
+       run: echo "Print Hello Message 2"

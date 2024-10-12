@@ -12,7 +12,7 @@ services:
   postgres:
     # берем образ postgres для нашего текущего контейнера
     # :latest указывает что берем последнюю версью образа postgres
-    image: postgres:latest
+    image: postgres:latest  
     # указываем название для контейнера (NAMES)
     container_name: postgres
     # указывает нужно ли перезапускать текущий контейнер если он не запустился и выдал ошибку
