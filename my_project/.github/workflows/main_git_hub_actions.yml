@@ -31,7 +31,7 @@ jobs:
     
 
   my_name_task2:
-    runs_on: ubunut-latest
+    runs_on: ubuntu-latest
 
     steps:
      - name: Print Hello Message 2
