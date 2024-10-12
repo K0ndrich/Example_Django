@@ -11,7 +11,7 @@ name: My_Name_Action
 
 on:
 # действие запускаеться только при push в указаную master ветку
-  push:
+  push:  
     branches:
     # указываем ветку 
     - master
