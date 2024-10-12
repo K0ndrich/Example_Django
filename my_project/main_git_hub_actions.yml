@@ -1,0 +1,38 @@
+# Git Hub Actions 
+# Файл хранит настройки для Автоматизации Кода текущего репозитория, само подлкючение Git Hub Actions к репозиторию
+
+# name харнит название для одного нашего действия (action), когда действия будет произвоидться тогда будем видеть наш name
+name: My_Name_Action
+
+# on указвает когда будет запускаться My_Git_Hub_Action в любом push в любую ветку
+# on:[push] действие запускаеться при push в любую ветку
+# on: Ctrl + Space
+# on: [push,pull_request] действие запускаеться при любом push в любую ветку и при любом pull из любой ветки
+
+on:
+# действие запускаеться только при push в указаную master ветку
+  push:
+    branches:
+    # указываем ветку 
+    - master
+
+# jobs хранит задачи, котоырые нужно будет выполнять
+# каждый job(таска) запускаеться на отельной вирутальной машине, образ которой нужно указывать
+jobs:
+  # даем название своим таскам
+  my_name_task1:
+    runs_on: ubuntu-latest
+    # steps указывает действия которые будут выполняться внутри вирутальной машини
+    steps:
+    # name указзываем название нашего step, наше имя Print Hello Message
+      - name: Print Hello Message 1
+        # run укзываем команды, которые будут выполняться в step, а именно внутри вирртульной машини ubuntu
+        run: echo "Print Hello Message1 "
+    
+
+  my_name_task2:
+    runs_on: ubuntu-latest
+
+    steps:
+     - name: Print Hello Message 2
+       run: echo "Print Hello Message 2"
